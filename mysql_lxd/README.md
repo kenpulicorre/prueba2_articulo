@@ -1,5 +1,7 @@
 # LXC/LXD
 
+<img src="imagen/inicio.png" alt="Mini Shell Remoto Cliente/Servidor" width="650"/>
+
 Esta carpeta contiene el paso a paso para acceder al servidor MySQL en un ambiente LXD
 Ejecutar sobre una versión del kernel de linux 5.10.19
 
@@ -7,17 +9,17 @@ Ejecutar sobre una versión del kernel de linux 5.10.19
 
 - Una vez se tenga instalado y se inicie el comando `sudo lxd init` se recomienda dejar las configuraciones por defecto.
 - Es importante que se intale el servidor `MySQL` en el host de la maquina donde trabaje. Para ello puede utilizar el comando:
-  - Instalar MySQL: `sudo apt install mysql-server `
+- Instalar MySQL: `sudo apt install mysql-server `
 
 ## Procedimiento
 
--Creacion de un nuevo contenedor (LXC) , para implementar `MySQL`, se toma como ejemplo la version `ubuntu:18.04` , y el contenedor se denota con el nombre `n-cont-mysql`, este nombre varia segun el gusto del programador
+-Creacion de un nuevo contenedor (LXC) , para implementar `MySQL`, se toma como ejemplo la version `ubuntu:18.04` , y el contenedor se denota con el nombre `n-cont-mysql`, este nombre varia segun el gusto del programador:
 
 - Crear contenedor : `lxc launch ubuntu:18.04 n-cont-mysql`
 - Inicio de sesion en el contenedor creado (n-cont-mysql) .
 - Abrir contenedor : `lxc exec n-cont-mysql bash`
 
-ahora si en el contenedor creo mysql:
+  ahora si en el contenedor creo mysql:
 
 - _Creacion de contenedor_
 
