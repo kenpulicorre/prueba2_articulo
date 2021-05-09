@@ -9,9 +9,7 @@ Ejecutar sobre una versión del kernel de linux 5.10.19
 
 - Una vez se tenga instalado y se inicie el comando `sudo lxd init` se recomienda dejar las configuraciones por defecto.
 - Es importante que se intale el servidor `MySQL` en el host de la maquina donde trabaje. Para ello puede utilizar el comando:
-
-* Instalar MySQL: `sudo apt install mysql-server `
-  ke
+  Instalar MySQL: `sudo apt install mysql-server `
 
 ## Procedimiento
 
