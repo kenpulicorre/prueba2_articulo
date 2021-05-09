@@ -1,6 +1,6 @@
 # LXC/LXD
 
-<img src="imagen/inicio.png" alt="Mini Shell Remoto Cliente/Servidor" width="650"/>
+<img src="imagen/new.png" alt="Mini Shell Remoto Cliente/Servidor" width="650"/>
 
 Esta carpeta contiene el paso a paso para acceder al servidor MySQL en un ambiente LXD
 Ejecutar sobre una versión del kernel de linux 5.10.19
