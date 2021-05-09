@@ -5,15 +5,13 @@ Ejecutar sobre una versión del kernel de linux 5.10.19
 
 ## Configuracion inicial
 
-<img src="imagen/inicio.png" alt="MySQL con LXC" width="650"/>
-
 - Una vez se tenga instalado y se inicie el comando `sudo lxd init` se recomienda dejar las configuraciones por defecto.
 - Es importante que se intale el servidor `MySQL` en el host de la maquina donde trabaje. Para ello puede utilizar el comando:
-  -Instalar MySQL: `sudo apt install mysql-server `Y` `
-
+  -Instalar MySQL: `sudo apt install mysql-server `
+  -nada
 ## Procedimiento
 
--Creacion de un nuevo contenedor (LXC) , para implementar `MySQL`, se toma como ejemplo la version `ubuntu:18.04` , y el contenedor se denota con el nombre `n-cont-mysql`, este nombre varia segun el gusto del programador.
+-Creacion de un nuevo contenedor (LXC) , para implementar `MySQL`, se toma como ejemplo la version `ubuntu:18.04` , y el contenedor se denota con el nombre `n-cont-mysql`, este nombre varia segun el gusto del programador
 -Crear contenedor : `lxc launch ubuntu:18.04 n-cont-mysql`
 
 -Inicio de sesion en el contenedor creado (n-cont-mysql) .
