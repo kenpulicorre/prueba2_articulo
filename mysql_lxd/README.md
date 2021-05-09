@@ -44,6 +44,7 @@ Dentro del contenedor crear o instalar _MySQL_:
   -Configurar el acceso remoto, abro _mysqld.cnf_, para configurar los cambio deseados: ` vi /etc/mysql/mysql.conf.d/mysqld.cnf`
 
 Cambio de _bind-address_ de _127.0.0.1 por 0.0.0.0_
+
 <img src="imagen/bind_address.png" alt="bind-adress" width="650"/>
 
 -Reinicie _MySQL_, para que se apliquen los cambios: `systemctl restart mysql`
@@ -60,41 +61,42 @@ Cambio de _bind-address_ de _127.0.0.1 por 0.0.0.0_
 
 -Obtener la ip del contenedor con MySQL, para ello hay dos formas:
 
-\* Una opcion es desde la terminal del contenedor del ejemplo (`n-cont-mysql`) y digitando el comando: `ifconfig`
+\ -Una opcion es desde la terminal del contenedor del ejemplo (`n-cont-mysql`) y digitando el comando: `ifconfig`
 
 \* Otra opcion es desde el host, con el comando: `lxc list`
 
 <img src="imagen/ipcontenedor.png" alt="iphost" width="650"/>
 
-- 5- Creando flujo de informacion desde el MySQL creado en el contenedor hacia el host:
+- 5- Creando una BBDD, informacion desde el MySQL creado en el contenedor hacia el host:
 
-- -
--
--
+  5.1) Posicionarse en el contenedor y entrar al servidor mysql:
 
-- _Creacion de contenedor_
+\*Abrir contenedor : `lxc exec n-cont-mysql bash`
 
-- Instalar lxc: `sudo apt install lxc`
-- Instalar lxd: `sudo snap install lxd`
-- Inicializar lxd con: `lxd init`
-- Crear cualquier contenedor: `lxc launch imageserver:imagename instancename`
-- Instanciar cualquier contenedor: `lxc start instancename`
-  [ver mas](https://linuxcontainers.org/lxd/getting-started-cli/)
+\*Entrar al servidor: `mysql -u root -p`
 
-## Ejecución
+-Dentro del servidor MySQL, crear un nueva nueva base de datos:
 
-Después de configurar lxd, para ejecutar las pruebas en lxd se debe ejecutar el archivo `scripts/stress_lxd.sh` el cual realiza lo siguiente
+\*Creando nueva base, donde el nombre `ejemplo1` puede variar a gusto del programador:
 
-- Crear contenedor de prueba: `lxc launch ubuntu:20.10 lxdtest`
-- Instanciar contenedor de prueba: `lxc start lxdtest`
-- Instalar stress-ng en el contenedor: `lxc exec lxdtest -- snap install stress-ng`
+`mysql> CREATE DATABASE ejemplo1;`
 
-### Stress-ng
+\*Asigno todos los privilegios a quien tendra acceso a la BBDD, donde el usuario `usuario_ejemplo`, y la clave `'12345'` puede variar a gusto del programador, y el número ip correspondiente al Host: `10.150.225.1`, se identifica en el punto `4`:
 
-EL comando que ejecuta todas las pruebas es el siguiente para el contenedor $CONTAINER y el tiempo de ejecución $TIMEOUT
+`GRANT ALL PRIVILEGES ON ejemplo1.\* TO usuario_ejemplo@10.150.225.1 IDENTIFIED BY '12345'; `
 
-`lxc exec $CONTAINER -- stress-ng --cpu 4 --timeout $TIMEOUT --metrics --log-file /root/stress_test.log`
+<img src="imagen/BBDD_creada.png" alt="comandos_para _creacion_BBDD" width="650"/>
 
-Los resultados del test quedan guardados en /root/stress_test.log en el contenedor, y pueden consultarse extrayendo el archivo mediante
+5.2) Posicionarse en el Host y entrar al servidor mysql, para poder ver la base de datos `ejemplo1` creada en el contenedor , en paso `5.1`
 
-`lxc file pull $CONTAINER/root/stress_ng.log .`
+\*Accedo al servicio de MySQL dentro del contenedor:
+
+`mysql -u usuario_ejemplo -h 10.150.225.155 -p12345 ejemplo1`
+
+Donde '12345' es la contraseña puesta en `5.1` , y donde `usuario_ejemplo ` es el usuari creado en `5.1`
+
+\*Visualizar base de datos creada:
+
+`show databases`
+
+<img src="imagen/BBDD_Acceso_desde_host.png" alt="comandos_para _acceder_BBDD" width="650"/>
