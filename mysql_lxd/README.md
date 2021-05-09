@@ -1,7 +1,5 @@
 # LXC/LXD
 
-<img src="imagen/new.png" alt="Mini Shell Remoto Cliente/Servidor" width="650"/>
-
 Esta carpeta contiene el paso a paso para acceder al servidor MySQL en un ambiente LXD
 Ejecutar sobre una versión del kernel de linux 5.10.19
 
@@ -14,11 +12,11 @@ Ejecutar sobre una versión del kernel de linux 5.10.19
 
 ## Procedimiento
 
-- 1-Creacion de un nuevo contenedor (LXC) , para implementar `MySQL`, se toma como ejemplo la version `ubuntu:18.04` , y el contenedor se denota con el nombre `n-cont-mysql`, este nombre varia segun el gusto del programador:
+### 1) Creacion de un nuevo contenedor (LXC) , para implementar `MySQL`, se toma como ejemplo la version `ubuntu:18.04` , y el contenedor se denota con el nombre `n-cont-mysql`, este nombre varia segun el gusto del programador:
 
 -Crear contenedor : `lxc launch ubuntu:18.04 n-cont-mysql`
 
-- 2-Instalar dentro del contenedor MySQL:
+### 2) Instalar dentro del contenedor MySQL:
 
 Inicio de sesion en el contenedor creado (n-cont-mysql):
 
@@ -34,14 +32,14 @@ Dentro del contenedor crear o instalar _MySQL_:
 
 <img src="imagen/start_status_mysql.png" alt="Start_status" width="650"/>
 
-- 3-Para que el servidor acepte conexiones de equipos remotos convendrá substituir dentro de las configuraciones del MySQL el `bind-address` cambiando de `127.0.0.1` por `0.0.0.0` para que el servidor abra un puerto en todas las interfaces de red.
+### 3) Para que el servidor acepte conexiones de equipos remotos convendrá substituir dentro de las configuraciones del MySQL el `bind-address` cambiando de `127.0.0.1` por `0.0.0.0` para que el servidor abra un puerto en todas las interfaces de red.
 
-  -Ubicarse dentro del contenedor (creado con MySQL) con: `lxc exec n-cont-mysql bash`
+-Ubicarse dentro del contenedor (creado con MySQL) con: `lxc exec n-cont-mysql bash`
 
-  -valide y compruebe las direcciones de red : `netstat -plnt`, si no ha configurado aun el acceso remoto, se tiene lo siguiente:
-  <img src="imagen/bind_address_127.0.0.1.3306.png" alt="bind_address_127.0.0.1.3306" width="650"/>
+-valide y compruebe las direcciones de red : `netstat -plnt`, si no ha configurado aun el acceso remoto, se tiene lo siguiente:
+<img src="imagen/bind_address_127.0.0.1.3306.png" alt="bind_address_127.0.0.1.3306" width="650"/>
 
-  -Configurar el acceso remoto, abro _mysqld.cnf_, para configurar los cambio deseados: ` vi /etc/mysql/mysql.conf.d/mysqld.cnf`
+-Configurar el acceso remoto, abro _mysqld.cnf_, para configurar los cambio deseados: ` vi /etc/mysql/mysql.conf.d/mysqld.cnf`
 
 Cambio de _bind-address_ de _127.0.0.1 por 0.0.0.0_
 
@@ -54,7 +52,7 @@ Cambio de _bind-address_ de _127.0.0.1 por 0.0.0.0_
 -valide y compruebe las direcciones de red nuevamente: `netstat -plnt`, si hizo los cambios debe tener lo siguiente:
 <img src="imagen/bind_address_0.0.0.0.3306.png" alt="bind_address_0.0.0.0.3306" width="650"/>
 
-- 4- Obtener la ip del host y contenedor para hacer la comunicación:
+### 4) Obtener la ip del host y contenedor para hacer la comunicación:
 
 -Obtener la ip del Host , para ello ir a la terminal del host y el comando: `ifconfig`
 <img src="imagen/iphost.png" alt="iphost" width="650"/>
@@ -67,9 +65,9 @@ Cambio de _bind-address_ de _127.0.0.1 por 0.0.0.0_
 
 <img src="imagen/ipcontenedor.png" alt="iphost" width="650"/>
 
-- 5- Creando una BBDD, informacion desde el MySQL creado en el contenedor hacia el host:
+### 5) Creando una BBDD, informacion desde el MySQL creado en el contenedor hacia el host:
 
-  5.1) Posicionarse en el contenedor y entrar al servidor mysql:
+5.1) Posicionarse en el contenedor y entrar al servidor mysql:
 
 \*Abrir contenedor : `lxc exec n-cont-mysql bash`
 
