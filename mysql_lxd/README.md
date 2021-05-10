@@ -109,7 +109,7 @@ Ejecutar sobre una versión de kernel de linux 5.10.19
 
 <img src="imagen/BBDD_creada.png" alt="comandos_para _creacion_BBDD" width="650"/>
 
-### 5.2) Posicionarse en el Host para accceder al servidor MySQL, dentro del contenedor, para poder ver la base de datos `ejemplo1` creada , en paso[5.1](#51-posicionarse-en-el-contenedor-y-entrar-al-servidor-mysql-para-configurar-los-accesos)
+### 5.2) Posicionarse en el Host para accceder al servidor MySQL, dentro del contenedor, para poder ver la base de datos `ejemplo1` creada , en paso [5.1](#51-posicionarse-en-el-contenedor-y-entrar-al-servidor-mysql-para-configurar-los-accesos)
 
 **Descripcion:** Desde el Host, se accede a la base BBDD, para ello se debe tener presente el usuario y contraseña creadas en [5.1](#51-posicionarse-en-el-contenedor-y-entrar-al-servidor-mysql-para-configurar-los-accesos), asi pues usuario: `usuario_ejemplo ` , contraseñ: `12345`, y la direccion del contenedor donde se creó BBDD es decir la direccion **ip** del contendor : `10.150.225.155` :
 
