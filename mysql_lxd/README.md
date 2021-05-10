@@ -1,7 +1,6 @@
-# LXC/LXD
+# LXC/LXD con MySQL
 
-Esta carpeta contiene el paso a paso para acceder al servidor MySQL en un ambiente LXD
-Ejecutar sobre una versión del kernel de linux 5.10.19
+Esta carpeta contiene el paso a paso para acceder al servidor MySQL en un ambiente LXD, Ejecutar sobre una versión del kernel de linux 5.10.19
 
 ## Configuracion inicial
 
@@ -12,27 +11,33 @@ Ejecutar sobre una versión del kernel de linux 5.10.19
 
 ## Procedimiento
 
-### 1) Creacion de un nuevo contenedor (LXC) , para implementar `MySQL`, se toma como ejemplo la version `ubuntu:18.04` , y el contenedor se denota con el nombre `n-cont-mysql`, este nombre varia segun el gusto del programador:
+### 1) Creacion de un nuevo contenedor (LXC) e implementar `MySQL`.
+
+**Descripcion:** Para implementar `MySQL`, se toma como ejemplo la version `ubuntu:18.04` , y el contenedor se denota con el nombre `n-cont-mysql`, este nombre varia segun el gusto del programador.
 
 -Crear contenedor : `lxc launch ubuntu:18.04 n-cont-mysql`
 
-### 2) Instalar dentro del contenedor MySQL:
+### 2) Instalar dentro del contenedor , MySQL:
 
-Inicio de sesion en el contenedor creado (n-cont-mysql):
+**Descripcion:** se debe Iniciar sesion sobre el contenedor creado, que para el ejemplo es **(n-cont-mysql)**, y se debe instalar el servidor **MySQL**, finalmente se inicia el servicio MySQL, y se verifica el estado.
 
 -Abrir contenedor : `lxc exec n-cont-mysql bash`
 
-Dentro del contenedor crear o instalar _MySQL_:
-
 -Actualizacion en contenedor: `sudo apt update `
 
--Instalar MySQL en contenedor:`sudo apt install mysql-server`
+-Instalar MySQL en contenedor: `sudo apt install mysql-server`
 
--Inicie y Verifique estado del servicio MySQL: `systemctl start mysql` luego `systemctl status mysql`, se obtiene lo siguiente:
+-Iniciar servicio MySQL: `systemctl start mysql`
+
+-Verifique estado del servicio MySQ: `systemctl status mysql`
+
+- Se obtiene lo siguiente: `systemctl status mysql`
 
 <img src="imagen/start_status_mysql.png" alt="Start_status" width="650"/>
 
-### 3) Para que el servidor acepte conexiones de equipos remotos convendrá substituir dentro de las configuraciones del MySQL el `bind-address` cambiando de `127.0.0.1` por `0.0.0.0` para que el servidor abra un puerto en todas las interfaces de red.
+### 3) Aceptacion de conexión en todas las interfaces de red:
+
+**Descripción:** Para que el servidor acepte conexiones de equipos remotos convendrá substituir dentro de las configuraciones del MySQL el `bind-address` cambiando de `127.0.0.1` por `0.0.0.0` para que el servidor abra un puerto en todas las interfaces de red.
 
 -Ubicarse dentro del contenedor (creado con MySQL) con: `lxc exec n-cont-mysql bash`
 
@@ -59,7 +64,7 @@ Cambio de _bind-address_ de _127.0.0.1 por 0.0.0.0_
 
 -Obtener la ip del contenedor con MySQL, para ello hay dos formas:
 
-\ -Una opcion es desde la terminal del contenedor del ejemplo (`n-cont-mysql`) y digitando el comando: `ifconfig`
+\*Una opcion es desde la terminal del contenedor del ejemplo (`n-cont-mysql`) y digitando el comando: `ifconfig`
 
 \* Otra opcion es desde el host, con el comando: `lxc list`
 
