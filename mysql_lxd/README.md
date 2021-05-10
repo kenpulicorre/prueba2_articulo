@@ -47,46 +47,65 @@ Esta carpeta contiene el paso a paso para acceder al servidor MySQL en un ambien
   <img src="imagen/bind_address_127.0.0.1.3306.png" alt="bind_address_127.0.0.1.3306" width="650"/>
 
 - Configurar el acceso remoto, abro **mysqld.cnf**, para configurar los cambio deseados: ` vi /etc/mysql/mysql.conf.d/mysqld.cnf`
+
   - Cambio de _bind-address_ de _127.0.0.1 por 0.0.0.0_
-    - <img src="imagen/bind_address.png" alt="bind-adress" width="650"/>
 
--Reinicie _MySQL_, para que se apliquen los cambios: `systemctl restart mysql`
+  <img src="imagen/bind_address.png" alt="bind-adress" width="650"/>
 
--Si no se aplican cambios pare `systemctl stop mysql` y luego aplique `systemctl restart mysql`
+- Reinicie _MySQL_, para que se apliquen los cambios: `systemctl restart mysql`
 
--valide y compruebe las direcciones de red nuevamente: `netstat -plnt`, si hizo los cambios debe tener lo siguiente:
-<img src="imagen/bind_address_0.0.0.0.3306.png" alt="bind_address_0.0.0.0.3306" width="650"/>
+  - Si no se aplican cambios pare `systemctl stop mysql` y luego aplique `systemctl restart mysql`
+
+- valide y compruebe las direcciones de red nuevamente: `netstat -plnt`
+
+  - Si hizo los cambios debe tener lo siguiente:
+
+  <img src="imagen/bind_address_0.0.0.0.3306.png" alt="bind_address_0.0.0.0.3306" width="650"/>
 
 ### 4) Obtener la ip del host y contenedor para hacer la comunicación:
 
--Obtener la ip del Host , para ello ir a la terminal del host y el comando: `ifconfig`
-<img src="imagen/iphost.png" alt="iphost" width="650"/>
+**Descripción:** para obtener la direccion del Host se debe direccionar a la terminal principal (**terminal Host o anfitrion**), y para obtener la **ip** del contenedor se puede encontrar de dos formas: ingresando al contenedor (**contenedor del ejemplo: _n-cont-mysql_**)y desde la terminal hallar los datos , o la opcion 2 es desde la terminal del anfitrion, desde donde se creo el contenedor.
 
--Obtener la ip del contenedor con MySQL, para ello hay dos formas:
+para lograr comunicar y visualizar las BBDD creadas,
 
-\*Una opcion es desde la terminal del contenedor del ejemplo (`n-cont-mysql`) y digitando el comando: `ifconfig`
+- Obtener la ip del Host , `ifconfig`
 
-\* Otra opcion es desde el host, con el comando: `lxc list`
+  <img src="imagen/iphost.png" alt="iphost" width="650"/>
 
-<img src="imagen/ipcontenedor.png" alt="iphost" width="650"/>
+- Obtener la ip del contenedor con MySQL:
 
-### 5) Creando una BBDD, informacion desde el MySQL creado en el contenedor hacia el host:
+  - Desde la terminal del contenedor : `ifconfig`
+  - Desde el host, con el comando: `lxc list`
 
-5.1) Posicionarse en el contenedor y entrar al servidor mysql:
+  <img src="imagen/ipcontenedor.png" alt="iphost" width="650"/>
 
-\*Abrir contenedor : `lxc exec n-cont-mysql bash`
+### 5) Creando una BBDD,para el flujo de informacion desde el MySQL, creado en el contenedor, hacia el host:
 
-\*Entrar al servidor: `mysql -u root -p`
+---
 
--Dentro del servidor MySQL, crear un nueva nueva base de datos:
+5.1) Posicionarse en el contenedor y entrar al servidor mysql para configurar los accesos:
 
-\*Creando nueva base, donde el nombre `ejemplo1` puede variar a gusto del programador:
+- Abrir contenedor : `lxc exec n-cont-mysql bash`
 
-`mysql> CREATE DATABASE ejemplo1;`
+- Entrar al servidor MySQL: `mysql -u root -p`
 
-\*Asigno todos los privilegios a quien tendra acceso a la BBDD, donde el usuario `usuario_ejemplo`, y la clave `'12345'` puede variar a gusto del programador, y el número ip correspondiente al Host: `10.150.225.1`, se identifica en el punto `4`:
+  - Dentro del servidor MySQL, crear un nueva nueva base de datos:
 
-`GRANT ALL PRIVILEGES ON ejemplo1.\* TO usuario_ejemplo@10.150.225.1 IDENTIFIED BY '12345'; `
+    **Descripcion:** Una vez dentro del servidor, se crea una nueva base, donde el nombre `ejemplo1` puede variar a gusto del programador:
+
+    ```
+    mysql> CREATE DATABASE ejemplo1;
+    ```
+
+  - Asigno todos los privilegios a quien tendra acceso a la BBDD `ejemplo1` , que fue creada:
+
+    **Descripcion:** se crea un nombre de usuario y una clave (puede variar a gusto del programador), el cual sera quien puede acceder a la BBDD, asi pues para el ejemplo el usuario :`usuario_ejemplo`, y la clave: `'12345'` , y el número ip: `10.150.225.1` correspondiente al Host, que es desde donde se accesa.
+
+    ```
+    mysql> GRANT ALL PRIVILEGES ON ejemplo1.\* TO usuario_ejemplo@10.150.225.1 IDENTIFIED BY '12345';
+    ```
+
+  - Si realizó el proceso se deberia mirar como lo siguiente:
 
 <img src="imagen/BBDD_creada.png" alt="comandos_para _creacion_BBDD" width="650"/>
 
