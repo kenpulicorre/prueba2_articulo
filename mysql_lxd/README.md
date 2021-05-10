@@ -85,7 +85,7 @@ Ejecutar sobre una versión de kernel de linux 5.10.19
 
 ## 5.1
 
-## 4.2 ps
+## 4.2 ps ls
 
 ### Posicionarse en el contenedor y entrar al servidor mysql para configurar los accesos:
 
@@ -113,9 +113,7 @@ Ejecutar sobre una versión de kernel de linux 5.10.19
 
 <img src="imagen/BBDD_creada.png" alt="comandos_para _creacion_BBDD" width="650"/>
 
-[4.2a](#4.2 ps)
-[4.2](#4.2ps)
-[4.2c](#42 ps)
+[4.2](#42-ps-ls)
 
 5.2) Posicionarse en el Host para accceder al servidor MySQL, dentro del contenedor, para poder ver la base de datos `ejemplo1` creada , en paso [5.1](#51)
 
