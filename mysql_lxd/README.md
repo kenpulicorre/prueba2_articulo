@@ -66,8 +66,6 @@ Esta carpeta contiene el paso a paso para acceder al servidor MySQL en un ambien
 
 **Descripción:** para obtener la direccion del Host se debe direccionar a la terminal principal (**terminal Host o anfitrion**), y para obtener la **ip** del contenedor se puede encontrar de dos formas: ingresando al contenedor (**contenedor del ejemplo: _n-cont-mysql_**)y desde la terminal hallar los datos , o la opcion 2 es desde la terminal del anfitrion, desde donde se creo el contenedor.
 
-para lograr comunicar y visualizar las BBDD creadas,
-
 - Obtener la ip del Host , `ifconfig`
 
   <img src="imagen/iphost.png" alt="iphost" width="650"/>
@@ -83,7 +81,9 @@ para lograr comunicar y visualizar las BBDD creadas,
 
 ---
 
-5.1) Posicionarse en el contenedor y entrar al servidor mysql para configurar los accesos:
+#### 5.1
+
+### Posicionarse en el contenedor y entrar al servidor mysql para configurar los accesos:
 
 - Abrir contenedor : `lxc exec n-cont-mysql bash`
 
@@ -109,16 +109,18 @@ para lograr comunicar y visualizar las BBDD creadas,
 
 <img src="imagen/BBDD_creada.png" alt="comandos_para _creacion_BBDD" width="650"/>
 
-5.2) Posicionarse en el Host y entrar al servidor mysql, para poder ver la base de datos `ejemplo1` creada en el contenedor , en paso `5.1`
+5.2) Posicionarse en el Host para accceder al servidor MySQL, dentro del contenedor, para poder ver la base de datos `ejemplo1` creada , en paso [5.1](#5.1)
 
-\*Accedo al servicio de MySQL dentro del contenedor:
+**Descripcion:** Desde el Host, se accede a la base BBDD, para ello se debe tener presente el usuario y contraseña creadas en [5.1](#5.1) , asi pues usuario: `usuario_ejemplo ` , contraseñ: `12345`, y la direccion del contenedor donde se creó BBDD es decir la direccion **ip** del contendor : `10.150.225.155` :
 
-`mysql -u usuario_ejemplo -h 10.150.225.155 -p12345 ejemplo1`
+- Accedo al servicio de MySQL dentro del contenedor: `mysql -u usuario_ejemplo -h 10.150.225.155 -p12345 ejemplo1`
 
-Donde '12345' es la contraseña puesta en `5.1` , y donde `usuario_ejemplo ` es el usuari creado en `5.1`
+- Visualizar base de datos creada:
 
-\*Visualizar base de datos creada:
+  ```
+  mysql> show databases
+  ```
 
-`show databases`
+  - se deberia tener algo como lo siguiente
 
 <img src="imagen/BBDD_Acceso_desde_host.png" alt="comandos_para _acceder_BBDD" width="650"/>
