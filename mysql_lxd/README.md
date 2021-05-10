@@ -6,8 +6,7 @@ Esta carpeta contiene el paso a paso para acceder al servidor MySQL en un ambien
 
 - Una vez se tenga instalado LXC y LXD y se inicie el comando `sudo lxd init` se recomienda dejar las configuraciones por defecto.
 - Es importante que se intale el servidor `MySQL` en el host de la maquina donde trabaje. Para ello puede utilizar el comando:
-
--Instalar MySQL: `sudo apt install mysql-server `
+- Instalar MySQL: `sudo apt install mysql-server `
 
 ## Procedimiento
 
@@ -15,23 +14,23 @@ Esta carpeta contiene el paso a paso para acceder al servidor MySQL en un ambien
 
 **Descripcion:** Para implementar `MySQL`, se toma como ejemplo la version `ubuntu:18.04` , y el contenedor se denota con el nombre `n-cont-mysql`, este nombre varia segun el gusto del programador.
 
--Crear contenedor : `lxc launch ubuntu:18.04 n-cont-mysql`
+- Crear contenedor : `lxc launch ubuntu:18.04 n-cont-mysql`
 
 ### 2) Instalar dentro del contenedor , MySQL:
 
 **Descripcion:** se debe Iniciar sesion sobre el contenedor creado, que para el ejemplo es **(n-cont-mysql)**, y se debe instalar el servidor **MySQL**, finalmente se inicia el servicio MySQL, y se verifica el estado.
 
--Abrir contenedor : `lxc exec n-cont-mysql bash`
+- Abrir contenedor : `lxc exec n-cont-mysql bash`
 
--Actualizacion en contenedor: `sudo apt update `
+- Actualizacion en contenedor: `sudo apt update `
 
--Instalar MySQL en contenedor: `sudo apt install mysql-server`
+- Instalar MySQL en contenedor: `sudo apt install mysql-server`
 
--Iniciar servicio MySQL: `systemctl start mysql`
+- Iniciar servicio MySQL: `systemctl start mysql`
 
--Verifique estado del servicio MySQ: `systemctl status mysql`
+- Verifique estado del servicio MySQ: `systemctl status mysql`
 
-- Se obtiene lo siguiente: `systemctl status mysql`
+  - Se obtiene lo siguiente:
 
 <img src="imagen/start_status_mysql.png" alt="Start_status" width="650"/>
 
@@ -39,16 +38,17 @@ Esta carpeta contiene el paso a paso para acceder al servidor MySQL en un ambien
 
 **Descripción:** Para que el servidor acepte conexiones de equipos remotos convendrá substituir dentro de las configuraciones del MySQL el `bind-address` cambiando de `127.0.0.1` por `0.0.0.0` para que el servidor abra un puerto en todas las interfaces de red.
 
--Ubicarse dentro del contenedor (creado con MySQL) con: `lxc exec n-cont-mysql bash`
+- Ubicarse dentro del contenedor creado con MySQL: `lxc exec n-cont-mysql bash`
 
--valide y compruebe las direcciones de red : `netstat -plnt`, si no ha configurado aun el acceso remoto, se tiene lo siguiente:
-<img src="imagen/bind_address_127.0.0.1.3306.png" alt="bind_address_127.0.0.1.3306" width="650"/>
+- valide y compruebe las direcciones de red : `netstat -plnt`
 
--Configurar el acceso remoto, abro _mysqld.cnf_, para configurar los cambio deseados: ` vi /etc/mysql/mysql.conf.d/mysqld.cnf`
+  - Si no ha configurado aun el acceso remoto, se tiene lo siguiente:
 
-Cambio de _bind-address_ de _127.0.0.1 por 0.0.0.0_
+  <img src="imagen/bind_address_127.0.0.1.3306.png" alt="bind_address_127.0.0.1.3306" width="650"/>
 
-<img src="imagen/bind_address.png" alt="bind-adress" width="650"/>
+- Configurar el acceso remoto, abro **mysqld.cnf**, para configurar los cambio deseados: ` vi /etc/mysql/mysql.conf.d/mysqld.cnf`
+  - Cambio de _bind-address_ de _127.0.0.1 por 0.0.0.0_
+    - <img src="imagen/bind_address.png" alt="bind-adress" width="650"/>
 
 -Reinicie _MySQL_, para que se apliquen los cambios: `systemctl restart mysql`
 
